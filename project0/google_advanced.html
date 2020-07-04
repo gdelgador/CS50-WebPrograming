@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Advanced Search</title>
+        <link rel="stylesheet" href="advanced_style.css">
+    </head>
+    <body>
+        <!-- Navegation -->
+        <div class="navegation">
+            <ul>
+                <img class="nlogo" alt="Google" width="75px" height="45px" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                <li><a class="links" href="#user"><button class="signbutton" type="button">Sign in</button></a></li>
+                <li><a href="#grid"><img class="grid" src="https://cdn3.iconfinder.com/data/icons/navigation-and-settings/24/Material_icons-01-11-512.png" title="Google apps"></a></li>      
+                <li><a href="index.html">Back to index</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="appbar">
+            <label style="margin-left:10px">Advanced Search</label>
+        </div>
+
+        <div class="container">
+            <form action="https://www.google.com/search">
+                <div class="row">
+                    <div class="column left">
+                        Find pages with...
+                    </div>
+                    <div class="column middle">
+                        
+                    </div>
+                    <div class="column right">
+                        To do this in the search box
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="column left">
+                        <label for="words">All these words:</label>
+                    </div>
+                    <div class="column middle">
+                        <input class="searchbar" type="text" id="words" name="as_q">
+                    </div>
+                    <div class="column right">
+                        Type the important words: tricolor rat terrier
+                    </div>
+                </div>
+    
+                
+                <div class="row">
+                    <div class="column left">
+                        <label for="exact">This exact word or phrase:</label>
+                    </div>
+                    <div class="column middle">
+                        <input class="searchbar" type="text" id="exact" name="as_epq">
+                    </div>
+                    <div class="column right">
+                        Put the exact words in quotes: "rat terrier"
+                    </div>
+                </div>
+    
+                
+                <div class="row">
+                    <div class="column left">
+                        <label for="any">Any of these words:</label>
+                    </div>
+                    <div class="column middle">
+                        <input class="searchbar" type="text" id="any" name="as_oq">
+                    </div>
+                    <div class="column right">
+                        Type OR between all the words you want: miniature OR standard
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="column left">
+                        <label for="none">None of these words:</label>
+                    </div>
+                    <div class="column middle">
+                        <input class="searchbar" type="text" id="none" name="as_eq">
+                    </div>
+                    <div class="column right">
+                        Put a minus sign just before words you don't want: -rodent, -"Jack Russell"
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="column left">
+                        
+                    </div>
+                    <div class="column middle">
+                        <input type="submit" value="Advanced Search">
+                    </div>
+                    
+                </div>
+            
+            </form>
+
+        </div>
+        
+    </body>
+</html>

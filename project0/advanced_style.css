@@ -1,0 +1,116 @@
+ul {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    margin: 0px 0px;
+    padding: 0px 0px;
+  }
+  
+  li {
+    float: right;
+  }
+  
+  li a {
+    color: #000;
+    display: block;
+    text-align: center;
+    padding: 10px 10px;
+    text-decoration: none;
+    font-size:14px;
+  }
+
+  li a:hover {
+    text-decoration: underline;
+  }
+  .grid{
+    height:23px;
+    position:relative;
+    bottom:4px;
+  }
+  .signbutton{
+    background-color: #4885ed;
+    color: #fff;
+    border:none;
+    border-radius:3px;
+    padding:7px 10px;
+    position:relative;
+    bottom:7px;
+    font-weight:bold;
+  }
+
+  .searchbar{
+    height:25px;
+    border:none;
+    width:500px;
+    font-size:16px;
+    outline: none;
+    border:1px solid #dcdcdc;
+    padding: 1px 8px;
+  }
+  
+span{
+  color: #4885ed;
+  left: 215px;
+  top: 76px;
+}
+
+body{
+  margin: 0px 0px;
+  font: 16px/16px roboto-regular, arial, sans-serif;
+}
+
+div.appbar{
+    color: #d93025;
+    font: 20px arial,sans-serif;
+    margin: 25px 35px;
+}
+
+div.others{
+    padding: 0px,30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px 45px;
+}
+
+.left{
+  width: 15%;
+}
+
+.middle {
+  width: 35%;
+}
+
+.right{
+  width: 25%;
+  color: #555555;
+  font-size: 11px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+input[type=submit] {
+  background-color: #4d90fe;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+label[for]{
+  color: #222222;
+  font-size: 13px;
+}
