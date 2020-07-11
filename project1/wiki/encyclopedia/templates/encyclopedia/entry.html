@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %}
+
+<!-- Markdown Title -->
+{% block title %}
+    {{ name }}
+{% endblock %}
+
+<!-- MArkdown Content -->
+{% block body %}
+    {{ content|safe }}
+
+    <form action="{% url 'add' name=name %}">
+        <!-- <input type="text" name="Edit" id=""> -->
+        <input type="submit" value="Edit">
+    </form>
+
+{% endblock %}

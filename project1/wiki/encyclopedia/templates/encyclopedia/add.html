@@ -1,0 +1,26 @@
+
+{% extends "encyclopedia/layout.html" %}
+
+<!-- Markdown Title -->
+{% block title %}
+    Editing Text
+{% endblock %}
+
+<!-- MArkdown Content -->
+{% block body %}
+
+    {% if name == None %}
+        <form action="{% url 'add' name=name %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Save">
+        </form>
+    {% else %}
+        <form action="{% url 'add' name=name %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Save">
+        </form>
+    {% endif %}
+
+{% endblock %}

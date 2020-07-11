@@ -1,0 +1,21 @@
+
+
+{% extends "encyclopedia/layout.html" %}
+
+<!-- Markdown Title -->
+{% block title %}
+    Search Results
+{% endblock %}
+
+<!-- MArkdown Content -->
+{% block body %}
+    <h1>Search Results with "{{ query }}"</h1>
+
+    {% if lista %}
+        {% for l in lista %}
+            <li><a href="/wiki/{{ l }}">{{ l }}</a></li>
+        {% endfor %}
+    {% else %}
+        <span>No Results</span>
+    {% endif %}
+{% endblock %}

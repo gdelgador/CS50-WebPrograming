@@ -1,0 +1,17 @@
+
+{% extends "encyclopedia/layout.html" %}
+
+<!-- Markdown Title -->
+{% block title %}
+    Editing Text
+{% endblock %}
+
+<!-- MArkdown Content -->
+{% block body %}
+
+    <h1>Document alredy exist!!</h1>
+    
+    <span>
+        You can view the documente follow this <a href="{% url 'wiki' name=entry %}">link</a>
+    </span>
+{% endblock %}
