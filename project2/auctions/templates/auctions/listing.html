@@ -1,0 +1,94 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div>
+        <h3>Listing: {{ listing.title }}</h3>
+        <p>Category: {{ listing.categorie.categorie_name }}</p>
+        
+        <!-- Close listing -->
+        {% if user.username == listing.author.username %}
+            {% if listing.state %}
+                <form action="{% url 'listing' listing.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Close Bid" name="Close_bid_submit" class="btn btn-warning">
+                </form>
+            {% else %}
+                <p>Your listing was sold to {% if bid %} {{ bid.author }}{% endif %}</p>
+            {% endif %}
+        {% endif %}
+        <p></p>
+        <!-- add watchlist -->
+        <form action="{% url 'listing' listing.id %}" method="POST">
+            {% csrf_token %}
+            <!-- <button type="button" class="btn btn-success" name="watchlist_button">Add to watchlist</button> -->
+            <input type="submit" value="Add to watchlist" class="btn btn-success" name="watchlist_button">
+        </form>
+
+        <p>Listing created by {{ listing.author }} {% if user.username == listing.author.username %}(you){% endif %} on {{ listing.date }}</p>
+        <img src="{{ listing.image_url }}" alt="image_{{ listing.title }}" width="400" height="300">
+        <p>Base Price: {{ listing.base_bid }}</p>
+        <p><b>Current Price: {% if bid %} {{ bid.bid }} {% else %} {{ listing.base_bid }} {% endif %}</b></p>
+        <p> Description: {{ listing.description }}</p>
+
+        <!-- Bid form -->
+        <div>
+            <p>{% if bid.author.username == user.username %} Your bit is the highest bid {% endif %}</p>
+            
+            <form action="{% url 'listing' listing.id %}" method="POST">
+                {% csrf_token %}
+                
+                {{ bid_form.as_p }}
+                <input type="submit", value="Place Bid" name="bid_submit">
+            </form>
+            
+        </div>
+    </div>
+    
+    
+
+    <!-- Form comment -->
+    <div>
+        {% if message %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        <form action="{% url 'listing' listing.id %}" method="POST">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+            <input type="submit", value="Add Comment" name="comment_submit">
+        </form>
+    </div>
+
+    <!-- Comments part -->
+    <div class="row d-flex justify-content-left mt-100 mb-100">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Latest Comments</h4>
+                </div>
+                <div class="comment-widgets">
+                    <!-- Comment Row -->
+                    {% for comment in comments %}
+                        <div class="d-flex flex-row comment-row m-t-0">
+                            <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
+                            <div class="comment-text w-100">
+                                <h6 class="font-medium">{{ comment.author }}</h6> <span class="m-b-15 d-block">{{ comment.comment }}</span>
+                                <div class="comment-footer"> <span class="text-muted float-right">
+                                    {{ comment.date }}
+
+                                <!-- </span> <button type="button" class="btn btn-cyan btn-sm">Edit</button> <button type="button" class="btn btn-success btn-sm">Publish</button> <button type="button" class="btn btn-danger btn-sm">Delete</button>  -->
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>Article without comments yet</p>
+                    {% endfor %}
+                </div> <!-- Card -->
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

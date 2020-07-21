@@ -1,0 +1,48 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Watchlist</h2>
+
+
+    {% if not user.is_authenticated %}
+        <p>
+            You must 
+            <a href="{% url 'login' %}">log in</a> 
+            or 
+            <a href="{% url 'register' %}">sing in</a>
+            for view this page
+        </p>
+    {% else %}
+        <!-- Showing watchlist -->
+        {% for watchlist in watchlists %}
+            {% if watchlist.watchlist %}
+                <div class="border border-primary">
+                    
+                    <div class="row">
+                        <div class="col">
+                            <img src="{{ watchlist.listing.image_url }}" alt="img" width="200" height="200" >
+                        </div>
+
+                        <div class="col">
+                            <h3><a href="{% url 'listing' watchlist.listing.id %}">{{ watchlist.listing.title }}</a></h3>
+                            <p><b>Starting Price: {{ watchlist.listing.base_bid }}</b></p>
+                            <p>Created: {{ watchlist.listing.date }}</p>
+                        </div>
+
+                        <div class="col center-block" style="text-align:center;">
+                            <form action="{% url 'watchlist' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="build" value="{{ watchlist.listing.id }}">
+                                <input type="submit" value="Remove watchlist" class="btn btn-success" name="watchlist_button">
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            {% endif %}
+        {% empty %}
+            <h4>No elements</h4>                
+        {% endfor %}
+    {% endif %}
+{% endblock %}
