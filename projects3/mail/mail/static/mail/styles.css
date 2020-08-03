@@ -1,0 +1,10 @@
+textarea {
+    min-height: 400px;
+}
+
+
+div.row {
+    border: 5px;
+    border-color: brown;
+    background-color: chartreuse;
+}
