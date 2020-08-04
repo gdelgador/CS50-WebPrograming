@@ -19,7 +19,7 @@ function compose_email(mail) {
   console.log('compose email: '+ (mail !== ''));
   console.log(mail)
   // const
-  const recipients = (mail !== '') ? (mail.recipients.join(', ')) : ('');
+  const recipients = (mail !== '') ? (mail.sender) : ('');
   var subject = (mail !== '') ? (mail.subject) : ('');
   var body = (mail !== '') ? (mail.body) : ('');
 
