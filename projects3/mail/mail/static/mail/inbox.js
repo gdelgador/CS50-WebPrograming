@@ -4,34 +4,36 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
-  document.querySelector('#compose').addEventListener('click', compose_email);
+  document.querySelector('#compose').addEventListener('click', () => compose_email(''));
 
   // By default, load the inbox
   load_mailbox('inbox');
 });
 
-function compose_email(mail=null) {
+function compose_email(mail) {
   // Show compose view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#open-email-view').style.display='none';
   document.querySelector('#compose-view').style.display = 'block';
   
+  console.log('compose email: '+ (mail !== ''));
   console.log(mail)
   // const
-  const recipients = (mail !== null) ? (mail.recipients.join(', ')) : ('');
-  const subject = (mail !== null) ? (mail.subject) : ('');
-  const body = (mail !== null) ? (mail.body) : ('');
+  const recipients = (mail !== '') ? (mail.recipients.join(', ')) : ('');
+  var subject = (mail !== '') ? (mail.subject) : ('');
+  var body = (mail !== '') ? (mail.body) : ('');
 
-  // subject = (subject.substring(0,3).toUpperCase() =='RE:') ? (subject) : ('RE: '+subject);
+  // for reply adding 'Re: subject'
+  if (mail !== '') {
+    subject = (subject.substring(0,3).toUpperCase() =='RE:') ? (subject) : ('RE: '+subject);
+    body = `On ${mail.timestamp} ${recipients} wrote:\n ${body}\n`;
+  }
+
   // set values in form for each case
-  // document.querySelector('#compose-recipients').value = recipients;
-  // document.querySelector('#compose-subject').value = subject;
-  // document.querySelector('#compose-body').value = body;
+  document.querySelector('#compose-recipients').value = recipients;
+  document.querySelector('#compose-subject').value = subject;
+  document.querySelector('#compose-body').value = body;
 
-  // Clear out composition fields
-  document.querySelector('#compose-recipients').value = '';
-  document.querySelector('#compose-subject').value = '';
-  document.querySelector('#compose-body').value = '';
   // send email
   document.querySelector('#compose-form').onsubmit = send_mail;
 }
@@ -62,7 +64,7 @@ function load_mailbox(mailbox) {
       // creating new element and adding class
       let element = document.createElement('div');
       element.classList.add('row');
-      element.style.cssText = (emails[k].read) ? ("background-color: white;") : ("background-color: gray;");
+      element.style.cssText = (emails[k].read) ? ("border: double; background-color: gray;") : ("border: double; background-color: white;");
 
       // create div's to insert
       element.innerHTML = `<div class="col-sm"><b>${sender}</b></div>`;
@@ -83,8 +85,6 @@ function send_mail() {
   const recipients = document.querySelector('#compose-recipients').value;
   const subject = document.querySelector('#compose-subject').value;
   const body = document.querySelector('#compose-body').value;
-  
-  alert(`Hello! ${recipients}, ${subject}, ${body}`);
 
   fetch('/emails', {
     method: 'POST',
@@ -98,8 +98,7 @@ function send_mail() {
   .then(result => {
       // Print result
       console.log(result);
-  }); 
-
+  });
   // reload page - index
   location.reload();
 }
@@ -133,12 +132,14 @@ function open_email(mail_id,mailbox) {
       element.innerHTML += `<h5><b>From: </b>${from}</h5>`;
       element.innerHTML += `<h5><b>To: </b>${to}</h5>`;
       element.innerHTML += `<p style="text-align: right;">${timestamp}</p>`;
+      element.innerHTML += '<hr>';
       element.innerHTML += `<div><p>${body}</p></div>`;
 
       // buttons functions
-      // document.querySelector('#reply').addEventListener('click', () => compose_email(email));
+      document.querySelector('#reply').addEventListener('click', () => compose_email(email));
       // archive button
       if ( mailbox !== 'sent') {
+        document.querySelector('#archive').style.display = 'block';
         document.querySelector('#archive').innerHTML= (email.archived) ? ('Unarchived') : ('Archived');
         document.querySelector('#archive').addEventListener('click', () => update_email_state(email,'archived'));
       }else{
@@ -146,7 +147,7 @@ function open_email(mail_id,mailbox) {
       }
     });
     
-  document.querySelector('#reply').onclick = compose_email;
+  // document.querySelector('#reply').onclick = compose_email(mail);
 }
 
 
