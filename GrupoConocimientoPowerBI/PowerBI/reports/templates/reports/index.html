@@ -1,0 +1,27 @@
+{% extends "reports/layout.html" %}
+{% load static %}
+
+
+<!-- body block -->
+{% block body %}
+
+    <h1>It´s index page</h1>
+
+    <p>daksjdkjasjkdas</p>
+
+
+    <button id='report' class="textLarge" style="display: inline-block;">Show Energy</button>
+
+
+    <!-- <iframe width="1080" height="760" src="" frameborder="0" allowfullscreen='true'></iframe> -->
+    <iframe width="1080" height="760" src="https://app.powerbi.com/view?r=eyJrIjoiYjU3YjZmOTctMWE2MS00MTZjLWJhNDYtOTJhZGE5OGYxODcyIiwidCI6IjMwNDhkYzg3LTQzZjAtNDEwMC05YWNiLWFlMTk3MWM3OTM5NSIsImMiOjh9&pageName=ReportSection0a9c3e79600da8a02082" frameborder="0" allowFullScreen="true"></iframe>
+
+
+{% endblock %}
+
+
+
+<!-- import js block -->
+{% block script %}
+    <script src="{% static 'reports/report.js' %}"></script>
+{% endblock %}
