@@ -1,0 +1,6 @@
+API COVID
+--------------------
+https://covid19api.com/
+
+-- GIT HUB: https://github.com/CSSEGISandData/COVID-19/issues/8
+https://api.covid19api.com/dayone/country/peru
