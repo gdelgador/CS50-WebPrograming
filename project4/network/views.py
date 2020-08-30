@@ -79,3 +79,7 @@ def register(request):
 @login_required(redirect_field_name='my_redirect_field')
 def profile(request, username):
     return render(request,"network/profile.html")
+
+@login_required(redirect_field_name='my_redirect_field')
+def following(request,username):
+    return HttpResponse('Following link')
