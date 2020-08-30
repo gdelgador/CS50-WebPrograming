@@ -4,11 +4,25 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+# my imports
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+
+# models imports
 from .models import User
 
 
 def index(request):
-    return render(request, "network/index.html")
+    # example from paginator 
+
+    contact_list = User.objects.all()
+    paginator = Paginator(contact_list, 10) # Show 10 tweets per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    # return render(request, 'list.html', {'page_obj': page_obj})
+
+    return render(request, "network/index.html",{'page_obj': page_obj})
 
 
 def login_view(request):
@@ -61,3 +75,7 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
+
+@login_required(redirect_field_name='my_redirect_field')
+def profile(request, username):
+    return render(request,"network/profile.html")

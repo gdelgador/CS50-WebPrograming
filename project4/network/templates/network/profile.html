@@ -1,0 +1,16 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    
+    <img src="{% static 'network/images/profile_found.jpg' %}" class="img-fluid" alt="Responsive image">
+
+    <h1>profile page</h1>
+    <h2>{{ request.user.username }}</h2>
+    
+    <hr>
+
+    <!-- to do -->
+    <!-- completar con tweets en order cronologico descendente -->
+
+{% endblock %}
